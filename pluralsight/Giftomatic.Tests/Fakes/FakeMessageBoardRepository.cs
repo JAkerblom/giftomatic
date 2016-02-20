@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Giftomatic.Data;
+using Giftomatic.Models;
 
 namespace Giftomatic.Tests.Fakes
 {
-  public class FakeMessageBoardRepository : IMessageBoardRepository
+  public class FakePredictionDataRepository : IPredictionDataRepository
   {
     public IQueryable<Reply> GetRepliesByTopic(int topicId)
     {

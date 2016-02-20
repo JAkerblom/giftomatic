@@ -119,7 +119,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MessageBoard\Giftomatic.csproj">
+    <ProjectReference Include="..\Giftomatic\Giftomatic.csproj">
       <Project>{9c0a3eea-dcb1-4c2c-9c00-c2ac79f07a11}</Project>
       <Name>Giftomatic</Name>
     </ProjectReference>

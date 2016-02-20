@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Giftomatic.Models
 {
-    public class UserInput
+    public class UserFeatureSet
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
@@ -27,7 +27,10 @@ namespace Giftomatic.Models
         //  numeric scale.
         public int ScaleValueX { get; set; }
         public int ScaleValueY { get; set; }
-        public int ItemId { get; set; }
-        public int Rating { get; set; }
+
+        public ICollection<ItemRating> ItemRatings { get; set; }
+
+        //public int ItemId { get; set; }
+        //public int Rating { get; set; }
   }
 }

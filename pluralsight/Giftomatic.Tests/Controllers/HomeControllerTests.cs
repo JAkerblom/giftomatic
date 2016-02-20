@@ -14,16 +14,17 @@ namespace Giftomatic.Tests.Controllers
   [TestClass]
   public class HomeControllerTests
   {
-    private FakeMessageBoardRepository _repo;
+    private FakePredictionDataRepository _repo;
     private HomeController _ctrl;
 
     [TestInitialize]
     public void Init()
     {
-      _repo = new FakeMessageBoardRepository();
-      _ctrl = new HomeController(new MockMailService(), _repo);
+      _repo = new FakePredictionDataRepository();
+            //_ctrl = new HomeController(new MockMailService(), _repo);
+      _ctrl = new HomeController(_repo);
 
-    }
+        }
 
     [TestMethod]
     public void IndexCanRender()

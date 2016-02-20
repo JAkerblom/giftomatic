@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7A2F10
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giftomatic", "MessageBoard\Giftomatic.csproj", "{9C0A3EEA-DCB1-4C2C-9C00-C2AC79F07A11}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giftomatic", "Giftomatic\Giftomatic.csproj", "{9C0A3EEA-DCB1-4C2C-9C00-C2AC79F07A11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giftomatic.Tests", "MessageBoard.Tests\Giftomatic.Tests.csproj", "{04DC6AAE-F7D0-415A-9B54-FCD11ED58261}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giftomatic.Tests", "Giftomatic.Tests\Giftomatic.Tests.csproj", "{04DC6AAE-F7D0-415A-9B54-FCD11ED58261}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

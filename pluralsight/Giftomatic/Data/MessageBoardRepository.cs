@@ -52,7 +52,6 @@ namespace Giftomatic.Data
       }
     }
 
-
     public IQueryable<Topic> GetTopicsIncludingReplies()
     {
       return _ctx.Topics.Include("Replies");

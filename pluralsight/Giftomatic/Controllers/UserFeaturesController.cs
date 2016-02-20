@@ -9,21 +9,21 @@ using Giftomatic.Models;
 
 namespace Giftomatic.Controllers
 {
-  public class UserInputController : ApiController
+  public class UserFeaturesController : ApiController
   {
-    private IMessageBoardRepository _repo;
-    public UserInputController(IMessageBoardRepository repo)
+    private IPredictionDataRepository _repo;
+    public UserFeaturesController(IPredictionDataRepository repo)
     {
       _repo = repo;
     }
 
-    public IEnumerable<Topic> Get(bool includeReplies = false)
+    public IEnumerable<UserFeatureSet> Get(bool includeItemRatings = false, bool include)
     {
-      IQueryable<Topic> results;
+      IQueryable<UserFeatureSet> results;
 
-      if (includeReplies == true)
+      if (includeItemRatings == true)
       {
-        results = _repo.GetTopicsIncludingReplies();
+        results = _repo.GetUserFeatureSetsIncludingItemRatings();
       }
       else
       {
@@ -57,6 +57,8 @@ namespace Giftomatic.Controllers
 
       return Request.CreateResponse(HttpStatusCode.NotFound);
     }
+
+    public IEnumerable<ItemFeatureSet> Get
 
     public HttpResponseMessage Post([FromBody]Topic newTopic)
     {

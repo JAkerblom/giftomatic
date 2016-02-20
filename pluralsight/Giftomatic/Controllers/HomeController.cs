@@ -9,6 +9,7 @@ using Giftomatic.Services;
 
 namespace Giftomatic.Controllers
 {
+  [HandleError]
   public class HomeController : Controller
   {
     //private IMailService _mail;
@@ -30,7 +31,7 @@ namespace Giftomatic.Controllers
       //                  .Take(25)
       //                  .ToList();
 
-      return View(topics);
+      return View();
     }
 
     public ActionResult About()
@@ -51,13 +52,13 @@ namespace Giftomatic.Controllers
     }
 
     [HttpPost]
-    public ActionResult Train(UserInput form_data)
+    public ActionResult Train(UserFeatureSet form_data)
     {      
       return View();
     }
 
     [HttpPost]
-    public ActionResult Predict(UserInput form_data)
+    public ActionResult Predict(UserFeatureSet form_data)
     {
         return View();
     }

@@ -14,16 +14,38 @@ namespace Giftomatic.Data
       _ctx = ctx;
     }
 
-    public IQueryable<Item> GetItems()
+    public IQueryable<Item> GetItemFeatures()
     {
-      return _ctx.Items;
+      return _ctx.ItemFeatureSets;
     }
 
-    public IQueryable<Reply> GetRepliesByTopic(int topicId)
+    public IQueryable<UserFeatureSet> GetUserFeatures()
     {
-      return _ctx.Replies.Where(r => r.TopicId == topicId);
+      return _ctx.UserFeatureSets;
     }
 
+    public IQueryable<ItemRating> GetItemRatings(int userId)
+    {
+      return _ctx.ItemRatings.Where(r => r.UserId == userId);
+    }
+
+    public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()
+    {
+      return _ctx.UserFeatureSets.Include("ItemRatings");
+    }
+    
+    public IQueryable<ItemImage> GetItemImages(int itemId = -1)
+    {
+      if (itemId == -1)
+      {
+        return _ctx.ItemImages;
+      }
+      else
+      {
+        return _ctx.ItemImages.Where(i => i.ItemId == itemId);
+      }
+      
+    }
 
     public bool Save()
     {
@@ -38,11 +60,11 @@ namespace Giftomatic.Data
       }
     }
 
-    public bool AddTopic(Topic newTopic)
+    public bool AddUserFeatureSet(UserFeatureSet newSetOfUserFeatures)
     {
       try
       {
-        _ctx.Topics.Add(newTopic);
+        _ctx.UserFeatureSets.Add(newSetOfUserFeatures);
         return true;
       }
       catch (Exception ex)
@@ -52,19 +74,25 @@ namespace Giftomatic.Data
       }
     }
 
-
-    public IQueryable<Topic> GetTopicsIncludingReplies()
-    {
-      return _ctx.Topics.Include("Replies");
-    }
-
-
-    public bool AddReply(Reply newReply)
+    public bool AddItemRatings(IEnumerable<ItemRating> newSetOfRatings)
     {
       try
       {
-        _ctx.Replies.Add(newReply);
+        _ctx.ItemRatings.Add(newSetOfRatings);
         return true;
+      }
+      catch (Exception ex)
+      {
+        // TODO log this error
+        return false;
+      }
+    }
+
+    public bool AddItemImage(ItemImage newItemImage)
+    {
+      try
+      {
+        _ctx.;
       }
       catch (Exception ex)
       {
