@@ -14,40 +14,40 @@ namespace Giftomatic.Data
       _ctx = ctx;
     }
 
-    public IQueryable<Item> GetItemFeatures()
+    public IQueryable<ExternalFeatureSet> GetExternalFeatures()
+    {
+      return _ctx.ExternalFeatureSets;
+    }
+
+    public IQueryable<ItemFeatureSet> GetItemFeatures()
     {
       return _ctx.ItemFeatureSets;
     }
-
-    public IQueryable<UserFeatureSet> GetUserFeatures()
+        
+    public IQueryable<ItemImage> GetItemImage()
     {
-      return _ctx.UserFeatureSets;
-    }
-
-    public IQueryable<ItemRating> GetItemRatings(int userId)
-    {
-      return _ctx.ItemRatings.Where(r => r.UserId == userId);
-    }
-
-    public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()
-    {
-      return _ctx.UserFeatureSets.Include("ItemRatings");
-    }
-    
-    public IQueryable<ItemImage> GetItemImages(int itemId = -1)
-    {
-      if (itemId == -1)
-      {
         return _ctx.ItemImages;
+ 
+        //return _ctx.ItemImages.Where(i => i.ItemId == itemId);
       }
-      else
-      {
-        return _ctx.ItemImages.Where(i => i.ItemId == itemId);
-      }
-      
     }
 
-    public bool Save()
+    /*public IQueryable<ItemRating> GetItemRatings(int userId)
+    {
+        return _ctx.ItemRatings.Where(r => r.UserId == userId);
+    }*/
+
+    /*public IQueryable<UserFeatureSet> GetUserFeatures()
+        {
+            return _ctx.UserFeatureSets;
+        }*/
+
+    /*public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()        
+    {
+        return _ctx.UserFeatureSets.Include("ItemRatings");
+    }*/
+
+    public bool SaveUser()
     {
       try
       {
@@ -78,7 +78,7 @@ namespace Giftomatic.Data
     {
       try
       {
-        _ctx.ItemRatings.Add(newSetOfRatings);
+        _ctx.ItemRatings.AddRange(newSetOfRatings);
         return true;
       }
       catch (Exception ex)
@@ -88,17 +88,24 @@ namespace Giftomatic.Data
       }
     }
 
-    public bool AddItemImage(ItemImage newItemImage)
+    /*public bool AddItem(ItemFeatureSet newItem) 
     {
-      try
-      {
-        _ctx.;
-      }
-      catch (Exception ex)
-      {
-        // TODO log this error
-        return false;
-      }
+
     }
+    */
+
+    /*public bool AddItemImage(ItemImage newItemImage)
+    //{
+    //  try
+    //  {
+    //    _ctx.;
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    // TODO log this error
+    //    return false;
+    //  }
+    }
+    */
   }
 }

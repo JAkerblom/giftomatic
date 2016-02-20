@@ -27,28 +27,28 @@ namespace Giftomatic.Controllers
       }
       else
       {
-        results = _repo.GetTopics();
+        results = _repo.GetUserFeatures();
       }
 
-      var topics = results.OrderByDescending(t => t.Created)
+      var userInputs = results.OrderByDescending(i => i.Created)
                           .Take(25)
                           .ToList();
 
-      return topics;
+      return userInputs;
     }
 
     // I didn't show this, but this is common
-    public HttpResponseMessage Get(int id, bool includeReplies = false)
+    public HttpResponseMessage Get(int id, bool includeItemRatings = false)
     {
-      IQueryable<Topic> results;
+      IQueryable<UserFeatureSet> results;
 
-      if (includeReplies == true)
+      if (includeItemRatings == true)
       {
-        results = _repo.GetTopicsIncludingReplies();
+        results = _repo.GetUserFeatureSetsIncludingItemRatings();
       }
       else
       {
-        results = _repo.GetTopics();
+        results = _repo.GetUserFeatures();
       }
 
       var topic = results.Where(t => t.Id == id).FirstOrDefault();
@@ -58,20 +58,20 @@ namespace Giftomatic.Controllers
       return Request.CreateResponse(HttpStatusCode.NotFound);
     }
 
-    public IEnumerable<ItemFeatureSet> Get
+    //public IEnumerable<ItemFeatureSet> Get
 
-    public HttpResponseMessage Post([FromBody]Topic newTopic)
+    public HttpResponseMessage Post([FromBody]UserFeatureSet newSetOfUserFeatures)
     {
-      if (newTopic.Created == default(DateTime))
+      if (newSetOfUserFeatures.Created == default(DateTime))
       {
-        newTopic.Created = DateTime.UtcNow;
+        newSetOfUserFeatures.Created = DateTime.UtcNow;
       }
 
-      if (_repo.AddTopic(newTopic) &&
-          _repo.Save())
+      if (_repo.AddUserFeatureSet(newSetOfUserFeatures) &&
+          _repo.SaveUser())
       {
         return Request.CreateResponse(HttpStatusCode.Created,
-          newTopic);
+          newSetOfUserFeatures);
       }
 
       return Request.CreateResponse(HttpStatusCode.BadRequest);

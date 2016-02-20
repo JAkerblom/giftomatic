@@ -20,9 +20,10 @@ namespace Giftomatic.Data
         );
     }
 
-    public DbSet<UserFeatureSet> UserFeatures { get; set; }
+    public DbSet<UserFeatureSet> UserFeatureSets { get; set; }
+    public DbSet<ExternalFeatureSet> ExternalFeatureSets { get; set; }
+    public DbSet<ItemFeatureSet> ItemFeatureSets { get; set; }
     public DbSet<ItemRating> ItemRatings { get; set; }
-    public DbSet<ItemFeatureSet> ItemFeatures { get; set; }
     public DbSet<ItemImage> ItemImages { get; set; }
 
   }

@@ -23,8 +23,8 @@ namespace Giftomatic
 
       config.Routes.MapHttpRoute(
           name: "DefaultApi",
-          routeTemplate: "api/v1/userinput/{id}",
-          defaults: new { controller = "userinput", id = RouteParameter.Optional }
+          routeTemplate: "api/v1/userfeatures/{id}",
+          defaults: new { controller = "userfeatures", id = RouteParameter.Optional }
       );
 
       // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.
