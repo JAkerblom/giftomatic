@@ -24,12 +24,12 @@ var giftPredictionModule = angular.module("giftPrediction", []);
 */
 
 homeIndexModule.config(["$routeProvider", function ($routeProvider) {
-  $routeProvider.when("/", {
+  $routeProvider.when("/:senderId", {
     controller: "userFormController",
     templateUrl: "/templates/userFormView.html"
   });
 
-  $routeProvider.when("/predictionResult/:id", {
+  $routeProvider.when("/predictionResult/:id/:senderId", {
     controller: "predictionResultController",
     templateUrl: "/templates/predictionResultView.html"
   });
@@ -153,6 +153,12 @@ homeIndexModule.factory("dataService", ["$http", "$q", function ($http, $q) {
     saveReply: _saveReply
   };
 }]);
+
+var userFormController = ["$scope", "$http", "$window", "dataService",
+    function ($scope, $http, $window, dataService) {
+        $scope.
+    }
+];
 
 var topicsController = ["$scope", "$http", "dataService",
   function ($scope, $http, dataService) {

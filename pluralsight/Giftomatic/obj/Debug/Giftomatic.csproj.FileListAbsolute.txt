@@ -1,1 +1,2 @@
 C:\Users\JAkerblom\Documents\Visual Studio 2015\Projects\Test-giftomatic\pluralsight\MessageBoard\obj\Debug\Giftomatic.csprojResolveAssemblyReference.cache
+C:\Users\JAkerblom\Documents\Visual Studio 2015\Projects\Test-giftomatic\pluralsight\Giftomatic\obj\Debug\Giftomatic.csprojResolveAssemblyReference.cache

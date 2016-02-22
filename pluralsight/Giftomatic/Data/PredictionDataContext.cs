@@ -25,6 +25,7 @@ namespace Giftomatic.Data
     public DbSet<ItemFeatureSet> ItemFeatureSets { get; set; }
     public DbSet<ItemRating> ItemRatings { get; set; }
     public DbSet<ItemImage> ItemImages { get; set; }
+    public DbSet<SenderLink> SenderLinks { get; set; }
 
   }
 }
