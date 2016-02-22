@@ -24,14 +24,13 @@ namespace Giftomatic.Data
       return _ctx.ItemFeatureSets;
     }
         
-    public IQueryable<ItemImage> GetItemImage()
+    public IQueryable<ItemImage> GetItemImages()
     {
         return _ctx.ItemImages;
  
         //return _ctx.ItemImages.Where(i => i.ItemId == itemId);
-      }
     }
-
+    
     /*public IQueryable<ItemRating> GetItemRatings(int userId)
     {
         return _ctx.ItemRatings.Where(r => r.UserId == userId);

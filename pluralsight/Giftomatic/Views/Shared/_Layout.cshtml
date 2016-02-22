@@ -92,10 +92,15 @@
                 <div id="ddtopmenubar" class="mattblackmenu">
                   <!-- Main navigation -->
                   <ul>
+                      <!-- Actionlink ( Code??, Action, Controller ) -->
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Statistics", "Statistics", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                    
+                    <!--
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("My Messages", "MyMessages", "Home")</li>
+                    -->
                   </ul>
                 </div>
               </div>
@@ -198,15 +203,17 @@
   </footer>
 
   <!-- JS -->
+  <!--
   <script src="~/Scripts/jquery-2.0.2.min.js"></script>
   <script src="~/Scripts/angular.min.js"></script>
   <script src="~/scripts/easing.js"></script>
   <script src="~/scripts/bootstrap.js"></script>
+  
   <script type="text/javascript" src="~/scripts/ddlevelsmenu.js"></script>
   <script type="text/javascript" src="~/scripts/flexslider.js"></script>
   <script type="text/javascript" src="~/scripts/jquery.prettyPhoto.js"></script>
   <script type="text/javascript" src="~/scripts/custom.js"></script>
-
+  -->
   @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,7 +1,9 @@
 ﻿// home-index.js
-var homeIndexModule = angular.module("homeIndex", []);
+// Later:: home-giftPrediction.js
+//var homeIndexModule = angular.module("homeIndex", []);
+var giftPredictionModule = angular.module("giftPrediction", []);
 
-homeIndexModule.config(["$routeProvider", function ($routeProvider) {
+/*homeIndexModule.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.when("/", {
     controller: "topicsController",
     templateUrl: "/templates/topicsView.html"
@@ -15,6 +17,21 @@ homeIndexModule.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.when("/message/:id", {
     controller: "singleTopicController",
     templateUrl: "/templates/singleTopicView.html"
+  });
+
+  $routeProvider.otherwise({ redirectTo: "/" });
+}]);
+*/
+
+homeIndexModule.config(["$routeProvider", function ($routeProvider) {
+  $routeProvider.when("/", {
+    controller: "userFormController",
+    templateUrl: "/templates/userFormView.html"
+  });
+
+  $routeProvider.when("/predictionResult/:id", {
+    controller: "predictionResultController",
+    templateUrl: "/templates/predictionResultView.html"
   });
 
   $routeProvider.otherwise({ redirectTo: "/" });
