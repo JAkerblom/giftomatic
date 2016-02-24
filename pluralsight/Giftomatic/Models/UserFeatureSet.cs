@@ -12,6 +12,10 @@ namespace Giftomatic.Models
         public string Zip { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+
+        // Include relation to any sender?
+        public string Relation { get; set; }
+
         // User may get multi-option questions 
         //  which presents a couple of nominal values
         public string SubjectPrefX { get; set; }

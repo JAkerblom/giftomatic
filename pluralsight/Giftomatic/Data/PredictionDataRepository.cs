@@ -19,32 +19,74 @@ namespace Giftomatic.Data
       return _ctx.ExternalFeatureSets;
     }
 
+    public IQueryable<ExternalFeatureSet> GetExternalFeaturesByUser(string zip, int age, string gender)
+    {
+      return _ctx.ExternalFeatureSets.Where(
+          e =>
+            (e.Zip == zip) &&
+            (e.Age == age) &&
+            (e.Gender == gender));
+    }
+
     public IQueryable<ItemFeatureSet> GetItemFeatures()
     {
       return _ctx.ItemFeatureSets;
     }
-        
-    public IQueryable<ItemImage> GetItemImages()
-    {
-        return _ctx.ItemImages;
- 
-        //return _ctx.ItemImages.Where(i => i.ItemId == itemId);
-    }
-    
-    /*public IQueryable<ItemRating> GetItemRatings(int userId)
-    {
-        return _ctx.ItemRatings.Where(r => r.UserId == userId);
-    }*/
 
-    /*public IQueryable<UserFeatureSet> GetUserFeatures()
+    public IQueryable<ItemFeatureSet> GetItemFeaturesByPrediction(int[] predictedItemsList, bool includeImages = true)
+    {
+      IQueryable<ItemFeatureSet> itemsWImages;
+      if (includeImages)
+      {
+        itemsWImages = _ctx.ItemFeatureSets.Include("ItemImages"); 
+      }
+      else
+      {
+        itemsWImages = _ctx.ItemFeatureSets;
+      }
+      
+      return itemsWImages.Where(
+            i =>
+              (i.ItemId == predictedItemsList[0]) ||
+              (i.ItemId == predictedItemsList[1]) ||
+              (i.ItemId == predictedItemsList[2]));
+    }
+        
+    public IQueryable<ItemImage> GetItemImages(int[] predictedItemsList)
+    {
+      return _ctx.ItemImages.Where(
+          i => 
+            (i.ItemId == predictedItemsList[0]) || 
+            (i.ItemId == predictedItemsList[1]) || 
+            (i.ItemId == predictedItemsList[2]));
+    }
+
+    public IQueryable<SenderLink> GetSender(string senderId)
+    {
+      return _ctx.SenderLinks.Where(s => s.Guid == senderId);
+    }
+
+    public IQueryable<SenderLink> GetSenderIncludingPredictions(string senderId)
+    {
+      var sender = _ctx.SenderLinks.Include("ItemRatings");
+      return sender.Where(s => s.Guid == senderId);
+    }
+        
+
+        /*public IQueryable<ItemRating> GetItemRatings(int userId)
         {
-            return _ctx.UserFeatureSets;
+            return _ctx.ItemRatings.Where(r => r.UserId == userId);
         }*/
 
-    /*public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()        
-    {
-        return _ctx.UserFeatureSets.Include("ItemRatings");
-    }*/
+        /*public IQueryable<UserFeatureSet> GetUserFeatures()
+            {
+                return _ctx.UserFeatureSets;
+            }*/
+
+        /*public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()        
+        {
+            return _ctx.UserFeatureSets.Include("ItemRatings");
+        }*/
 
     public bool SaveUser()
     {
@@ -86,12 +128,20 @@ namespace Giftomatic.Data
         return false;
       }
     }
-
-    /*public bool AddItem(ItemFeatureSet newItem) 
+      
+    public bool AddSenderLink(SenderLink newSender)
     {
-
-    }
-    */
+      try
+      {
+        _ctx.SenderLinks.Add(newSender);
+        return true;
+      }
+      catch (Exception ex)
+      {
+        // TODO log this error
+        return false;
+      }
+    }  
 
     /*public bool AddItemImage(ItemImage newItemImage)
     //{

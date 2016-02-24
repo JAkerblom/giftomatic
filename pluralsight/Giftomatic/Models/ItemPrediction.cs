@@ -5,10 +5,10 @@ using System.Web;
 
 namespace Giftomatic.Models
 {
-  public class ItemImage
+  public class ItemPrediction
   {
-    public int Id { get; set; }
-    public byte[] Image { get; set; }
     public int ItemId { get; set; }
+    public double Score { get; set; }
+    
   }
 }

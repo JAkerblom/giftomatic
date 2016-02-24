@@ -73,6 +73,10 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -81,6 +85,14 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.30506\lib\net40\System.Web.Http.OData.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -119,13 +131,7 @@
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
@@ -175,10 +181,6 @@
       <Private>True</Private>
       <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.0\lib\net40\System.Web.Http.OData.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -207,25 +209,32 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RepliesController.cs" />
-    <Compile Include="Controllers\UserFeaturesController.cs" />
-    <Compile Include="Controllers\TopicsController.cs" />
-    <Compile Include="Data\IMessageBoardRepository.cs" />
+    <Compile Include="Controllers\Acc_Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API_Controllers\SenderLinkController.cs" />
+    <Compile Include="Controllers\MVC_Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MsgBoard\RepliesController.cs" />
+    <Compile Include="Controllers\API_Controllers\PredictionDataController.cs" />
+    <Compile Include="Controllers\API_Controllers\UserFeaturesController.cs" />
+    <Compile Include="Controllers\MsgBoard\TopicsController.cs" />
+    <Compile Include="Data\AzureService.cs" />
+    <Compile Include="Data\IAzureService.cs" />
+    <Compile Include="Data\MsgBoard\IMessageBoardRepository.cs" />
     <Compile Include="Data\IPredictionDataRepository.cs" />
+    <Compile Include="Data\MsgBoard\MessageBoardMigrationsConfiguration.cs" />
     <Compile Include="Data\PredictionDataRepository.cs" />
     <Compile Include="Data\PredictionDataContext.cs" />
-    <Compile Include="Data\MessageBoardContext.cs" />
+    <Compile Include="Data\MsgBoard\MessageBoardContext.cs" />
     <Compile Include="Data\PredictionDataMigrationsConfiguration.cs" />
-    <Compile Include="Data\MessageBoardRepository.cs" />
+    <Compile Include="Data\MsgBoard\MessageBoardRepository.cs" />
+    <Compile Include="Models\ItemPrediction.cs" />
+    <Compile Include="Models\PredictionDataCollection.cs" />
     <Compile Include="Models\ExternalFeatureSet.cs" />
     <Compile Include="Models\ItemImage.cs" />
     <Compile Include="Models\SenderLink.cs" />
     <Compile Include="Models\ItemRating.cs" />
-    <Compile Include="Models\Reply.cs" />
+    <Compile Include="Models\MsgBoard\Reply.cs" />
     <Compile Include="Models\ItemFeatureSet.cs" />
-    <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\MsgBoard\Topic.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,6 +274,10 @@
     <Content Include="Content\Template\style\bootstrap.css.map" />
     <Content Include="Content\Template\style\bootstrap-theme.min.css.map" />
     <Content Include="Content\Template\style\bootstrap-theme.css.map" />
+    <Content Include="js\home-giftPrediction.js" />
+    <Content Include="js\home-index - Copy.min.js">
+      <DependentUpon>home-giftPrediction.js</DependentUpon>
+    </Content>
     <Content Include="js\home-index.js" />
     <Content Include="js\home-index.min.js">
       <DependentUpon>home-index.js</DependentUpon>

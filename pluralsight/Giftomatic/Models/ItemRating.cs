@@ -11,6 +11,8 @@ namespace Giftomatic.Models
     public DateTime Created { get; set; }
     public int UserId { get; set; }
     public int Rating { get; set; }
+
+    public int SenderLinkId { get; set; }
         
   }
 }

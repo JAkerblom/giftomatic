@@ -10,5 +10,8 @@ namespace Giftomatic.Models
     public int Id { get; set; }
     public string Email { get; set; }
     public string Guid { get; set; }
+    //public int RecipientId { get; set; }
+
+    ICollection<ItemRating> ItemRatings { get; set; }
   }
 }

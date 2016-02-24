@@ -6,8 +6,9 @@ using System.Net.Http;
 using System.Web.Http;
 using Giftomatic.Data;
 using Giftomatic.Models;
+using Newtonsoft.Json.Linq;
 
-namespace Giftomatic.Controllers
+namespace Giftomatic.Controllers.API_Controllers
 {
   public class UserFeaturesController : ApiController
   {
@@ -17,7 +18,7 @@ namespace Giftomatic.Controllers
       _repo = repo;
     }
 
-    public IEnumerable<UserFeatureSet> Get(bool includeItemRatings = false, bool include)
+    public IEnumerable<UserFeatureSet> Get(bool includeItemRatings = false)
     {
       IQueryable<UserFeatureSet> results;
 
@@ -44,11 +45,11 @@ namespace Giftomatic.Controllers
 
       if (includeItemRatings == true)
       {
-        results = _repo.GetUserFeatureSetsIncludingItemRatings();
+        //results = _repo.GetUserFeatureSetsIncludingItemRatings();
       }
       else
       {
-        results = _repo.GetUserFeatures();
+        //results = _repo.GetUserFeatures();
       }
 
       var topic = results.Where(t => t.Id == id).FirstOrDefault();
@@ -75,6 +76,28 @@ namespace Giftomatic.Controllers
       }
 
       return Request.CreateResponse(HttpStatusCode.BadRequest);
+    }
+
+    public HttpResponseMessage Post([FromBody]UserFeatureSet newSetOfUserFeatures, string senderId = null)
+    {
+        if (newSetOfUserFeatures.Created == default(DateTime))
+        {
+            newSetOfUserFeatures.Created = DateTime.UtcNow;
+        }
+        if (senderId != null)
+        {
+          var sender = _repo.GetSender(senderId).FirstOrDefault(); 
+        }
+        
+        var newUser = _repo.AddUserFeatureSet(newSetOfUserFeatures);
+
+        if (newUser)
+        {
+            return Request.CreateResponse(HttpStatusCode.Created,
+                newUser);
+        }
+
+        return Request.CreateResponse(HttpStatusCode.BadRequest);
     }
   }
 }

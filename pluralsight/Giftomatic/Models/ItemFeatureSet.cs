@@ -14,6 +14,6 @@ namespace Giftomatic.Models
     public string ProductGroup { get; set; }
     public bool IsExpensive { get; set; }
 
-    //public ICollection<Re> Replies { get; set; }
+    public ICollection<ItemImage> ItemImages { get; set; }
   }
 }

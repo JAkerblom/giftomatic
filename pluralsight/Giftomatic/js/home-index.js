@@ -1,9 +1,7 @@
 ﻿// home-index.js
-// Later:: home-giftPrediction.js
-//var homeIndexModule = angular.module("homeIndex", []);
-var giftPredictionModule = angular.module("giftPrediction", []);
+var homeIndexModule = angular.module("homeIndex", []);
 
-/*homeIndexModule.config(["$routeProvider", function ($routeProvider) {
+homeIndexModule.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.when("/", {
     controller: "topicsController",
     templateUrl: "/templates/topicsView.html"
@@ -17,21 +15,6 @@ var giftPredictionModule = angular.module("giftPrediction", []);
   $routeProvider.when("/message/:id", {
     controller: "singleTopicController",
     templateUrl: "/templates/singleTopicView.html"
-  });
-
-  $routeProvider.otherwise({ redirectTo: "/" });
-}]);
-*/
-
-homeIndexModule.config(["$routeProvider", function ($routeProvider) {
-  $routeProvider.when("/:senderId", {
-    controller: "userFormController",
-    templateUrl: "/templates/userFormView.html"
-  });
-
-  $routeProvider.when("/predictionResult/:id/:senderId", {
-    controller: "predictionResultController",
-    templateUrl: "/templates/predictionResultView.html"
   });
 
   $routeProvider.otherwise({ redirectTo: "/" });
@@ -153,12 +136,6 @@ homeIndexModule.factory("dataService", ["$http", "$q", function ($http, $q) {
     saveReply: _saveReply
   };
 }]);
-
-var userFormController = ["$scope", "$http", "$window", "dataService",
-    function ($scope, $http, $window, dataService) {
-        $scope.
-    }
-];
 
 var topicsController = ["$scope", "$http", "dataService",
   function ($scope, $http, dataService) {
