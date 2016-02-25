@@ -66,9 +66,11 @@ namespace Giftomatic.Controllers
     {
       ViewBag.Message = "Your stats page.";
 
-      var stats = _repo.GetStats()
-                      .ToList();
-      
+      //var stats = _repo.GetStats()
+      //                .ToList();
+
+      var stats = "";
+
       // TODO: 
       //  - Gather suggestions on indicators that may be of use
       //  - Implement the gets from database that aggregates these indicators

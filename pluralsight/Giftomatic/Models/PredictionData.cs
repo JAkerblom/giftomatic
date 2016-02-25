@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Giftomatic.Models
 {
-  public class PredictionDataCollection
+  public class PredictionData
   {
     public UserFeatureSet UserFeatures { get; set; }
     public ItemFeatureSet ItemFeatures { get; set; }

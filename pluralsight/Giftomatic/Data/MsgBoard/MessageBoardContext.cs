@@ -16,7 +16,7 @@ namespace Giftomatic.Data
       this.Configuration.ProxyCreationEnabled = false;
 
       Database.SetInitializer(
-        new MigrateDatabaseToLatestVersion<MessageBoardContext, PredictionDataMigrationsConfiguration>()
+        new MigrateDatabaseToLatestVersion<MessageBoardContext, MessageBoardMigrationsConfiguration>()
         );
     }
 

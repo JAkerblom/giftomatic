@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Giftomatic.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Giftomatic.Data
 {
   public class PredictionDataRepository : IPredictionDataRepository
   {
     PredictionDataContext _ctx;
-    public PredictionDataRepository(PredictionDataContext ctx)
+    AzureService _azure;
+    public PredictionDataRepository(PredictionDataContext ctx, AzureService azure)
     {
       _ctx = ctx;
+      _azure = azure;
     }
 
     public IQueryable<ExternalFeatureSet> GetExternalFeatures()
@@ -72,21 +75,43 @@ namespace Giftomatic.Data
       return sender.Where(s => s.Guid == senderId);
     }
         
+    // Methods for getting prediction from azure
+    public JObject GetPrediction(PredictionData data, int modelNr)
+    {
+      JObject jsonObj = _azure.GetPrediction(data, modelNr);
 
-        /*public IQueryable<ItemRating> GetItemRatings(int userId)
+      return jsonObj;
+    }
+
+    public JObject GetPrediction(UserFeatureSet usf, int modelNr)
+    {
+      JObject jsonObj = _azure.GetPrediction(usf, modelNr);
+
+      return jsonObj;
+    }
+
+    public JObject GetPrediction(ASUserFeatureSet usf, int modelNr)
+    {
+      JObject jsonObj = _azure.GetPrediction(usf, modelNr);
+
+      return jsonObj;
+    }
+
+
+    /*public IQueryable<ItemRating> GetItemRatings(int userId)
+    {
+        return _ctx.ItemRatings.Where(r => r.UserId == userId);
+    }*/
+
+    /*public IQueryable<UserFeatureSet> GetUserFeatures()
         {
-            return _ctx.ItemRatings.Where(r => r.UserId == userId);
+            return _ctx.UserFeatureSets;
         }*/
 
-        /*public IQueryable<UserFeatureSet> GetUserFeatures()
-            {
-                return _ctx.UserFeatureSets;
-            }*/
-
-        /*public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()        
-        {
-            return _ctx.UserFeatureSets.Include("ItemRatings");
-        }*/
+    /*public IQueryable<UserFeatureSet> GetUserFeatureSetsIncludingItemRatings()        
+    {
+        return _ctx.UserFeatureSets.Include("ItemRatings");
+    }*/
 
     public bool SaveUser()
     {

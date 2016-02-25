@@ -8,12 +8,21 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Giftomatic.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Giftomatic.Data
 {
   public class AzureService
   {
     PredictionDataContext _ctx;
+    string[,] _azureModels = new string[,]
+    {
+      {
+        "JUgZsn+BJImk6tSKqPuiaIH1WaVo+J9n+px6qNb4qnLP2K0C9d3Oubkaurhmg+k9SVxA3qXQ3Q4haBoFp6D6BA==",
+        "https://europewest.services.azureml.net/workspaces/0c8371e1485946f48a61b4bdd4f07c2c/services/cff0e9af2b8e44b0b57af48ffa8c9e5f/execute?api-version=2.0&details=true"
+      }      
+    };
+
 
     public AzureService (PredictionDataContext ctx)
     {
@@ -21,7 +30,7 @@ namespace Giftomatic.Data
     }
 
     //string GetPrediction(UserFeatureSet ufs, ItemFeatureSet ifs, ExternalFeatureSet efs)
-    string GetPrediction(PredictionDataCollection data)
+    public JObject GetPrediction(PredictionData data, int modelNr)
     {
       UserFeatureSet ufs = data.UserFeatures;
       ItemFeatureSet ifs = data.ItemFeatures;
@@ -53,13 +62,121 @@ namespace Giftomatic.Data
         
       }
 
-      string apiKey = "JUgZsn+BJImk6tSKqPuiaIH1WaVo+J9n+px6qNb4qnLP2K0C9d3Oubkaurhmg+k9SVxA3qXQ3Q4haBoFp6D6BA==";
-      string uri = "https://europewest.services.azureml.net/workspaces/0c8371e1485946f48a61b4bdd4f07c2c/services/f9b6186cce7642b59fdc1ad4e2d22768/execute?api-version=2.0&details=true";
+      //string apiKey = "JUgZsn+BJImk6tSKqPuiaIH1WaVo+J9n+px6qNb4qnLP2K0C9d3Oubkaurhmg+k9SVxA3qXQ3Q4haBoFp6D6BA==";
+      //string uri = "https://europewest.services.azureml.net/workspaces/0c8371e1485946f48a61b4bdd4f07c2c/services/f9b6186cce7642b59fdc1ad4e2d22768/execute?api-version=2.0&details=true";
+      string apiKey = _azureModels[modelNr, 1];
+      string uri = _azureModels[modelNr, 2];
       InvokeRequestResponseService(columnNames, values).Wait();
 
       string result = PostJsonAsync(uri, apiKey, columnNames, values).Result;
       
-      return result;
+      return JObject.Parse(result);
+    }
+
+    public JObject GetPrediction(UserFeatureSet u, int modelNr)
+    {
+      string result = PostJsonAsync("", "", new string[] { }, new string[,] { { } }).Result;
+
+      return JObject.Parse(result);
+    }
+
+    public JObject GetPrediction(ASUserFeatureSet u, int modelNr)
+    {
+      string[] columnNames = {
+        "zip",
+        "age",
+        "sexType",
+        "prefersSoftPresents",
+        "prefersSuntrip",
+        "prefersDog",
+        "santaBelief",
+        "chocolatePref",
+        "candyPref",
+        "kallePref",
+        "likesFood1",
+        "likesFood2",
+        "likesFood3",
+        "likesFood4",
+        "likesFood5",
+        "likesFood6",
+        "likesFood7",
+        "likesFood8",
+        "likesFood9",
+        "likesFood10",
+        "likesFood11",
+        "likesFood12"
+      };
+
+      //IDictionary<string, object> dataToDictionary = usf.AsDictionary();
+
+      string[] value = {
+        u.Zip,
+        u.Age.ToString(),
+        u.SexType,
+        u.PrefersSoftPresent.ToString(),
+        u.PrefersSuntrip.ToString(),
+        u.PrefersDog.ToString(),
+        u.SantaBelief.ToString(),
+        u.ChocolatePref,
+        u.CandyPref,
+        u.KallePref,
+        u.LikesFood1.ToString(),
+        u.LikesFood1.ToString(),
+        u.LikesFood2.ToString(),
+        u.LikesFood3.ToString(),
+        u.LikesFood4.ToString(),
+        u.LikesFood5.ToString(),
+        u.LikesFood6.ToString(),
+        u.LikesFood7.ToString(),
+        u.LikesFood8.ToString(),
+        u.LikesFood9.ToString(),
+        u.LikesFood10.ToString(),
+        u.LikesFood11.ToString(),
+        u.LikesFood12.ToString(),
+      };
+
+      string[,] values = new string[,] { 
+        {
+          "21771",
+          "25",
+          "male",
+          "0",
+          "0",
+          "1",
+          "0",
+          "dark",
+          "kola",
+          "robin-hood",
+          "1",
+          "1",
+          "1",
+          "0",
+          "1",
+          "1",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1"
+        }
+      };
+
+      //string requestBody = 
+      for (int i = 0; i < 3; i++)
+      {
+
+      }
+
+      //string apiKey = "JUgZsn+BJImk6tSKqPuiaIH1WaVo+J9n+px6qNb4qnLP2K0C9d3Oubkaurhmg+k9SVxA3qXQ3Q4haBoFp6D6BA==";
+      //string uri = "https://europewest.services.azureml.net/workspaces/0c8371e1485946f48a61b4bdd4f07c2c/services/f9b6186cce7642b59fdc1ad4e2d22768/execute?api-version=2.0&details=true";
+      string apiKey = _azureModels[modelNr-1, 1];
+      string uri = _azureModels[modelNr-1, 2];
+      //InvokeRequestResponseService(columnNames, values).Wait();
+
+      string result = PostJsonAsync(uri, apiKey, columnNames, values).Result;
+
+      return JObject.Parse(result);
     }
 
     public async Task<string> PostJsonAsync(string uri, string apiKey, string[] columnNames, string[,] values)
@@ -74,7 +191,7 @@ namespace Giftomatic.Data
               new StringTable()
               {
                 //ColumnNames = new string[] {"sexType", "age", "avgIncome", "prefersSuntrip", "prefersSoftPresent", "chocolatePref", "santaBelief", "itemID", "rating", "isExpensive", "priceGroup", "Category", "isFashionCat", "isSportsCat", "isElectronicsCat"},
-                //Values = new string[,] { { } }
+                //Values = new string[,] { {x } }
                 ColumnNames = columnNames,
                 Values = values
               }
@@ -106,7 +223,8 @@ namespace Giftomatic.Data
       }
     }
 
-    static async Task InvokeRequestResponseService(string[] columnNames, string[,] values)
+    // removed static. Don't know how it affects in this situation.
+    public async Task InvokeRequestResponseService(string[] columnNames, string[,] values)
     {
       using (var client = new HttpClient())
       {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Giftomatic.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Giftomatic.Data
 {
@@ -21,6 +22,9 @@ namespace Giftomatic.Data
     IQueryable<ItemImage> GetItemImages(int[] predictedItemsList);
     IQueryable<SenderLink> GetSender(string senderId);
     IQueryable<SenderLink> GetSenderIncludingPredictions(string senderId);
+    JObject GetPrediction(PredictionData data, int modelNr);
+    JObject GetPrediction(UserFeatureSet usf, int modelNr);
+    JObject GetPrediction(ASUserFeatureSet usf, int modelNr);
 
     // GETs that is useful for the retraining API
     //IQueryable<ItemRating> GetItemRatings();

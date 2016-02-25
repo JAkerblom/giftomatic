@@ -18,46 +18,47 @@ namespace Giftomatic.Controllers.API_Controllers
       _repo = repo;
     }
 
-    public IEnumerable<UserFeatureSet> Get(bool includeItemRatings = false)
-    {
-      IQueryable<UserFeatureSet> results;
+    //public IEnumerable<UserFeatureSet> Get(bool includeItemRatings = false)
+    //{
+      //IQueryable<UserFeatureSet> results;
 
-      if (includeItemRatings == true)
-      {
-        results = _repo.GetUserFeatureSetsIncludingItemRatings();
-      }
-      else
-      {
-        results = _repo.GetUserFeatures();
-      }
+      //if (includeItemRatings == true)
+      //{
+      //  results = _repo.GetUserFeatureSetsIncludingItemRatings();
+      //}
+      //else
+      //{
+      //  results = _repo.GetUserFeatures();
+      //}
 
-      var userInputs = results.OrderByDescending(i => i.Created)
-                          .Take(25)
-                          .ToList();
+      //var userInputs = results.OrderByDescending(i => i.Created)
+      //                    .Take(25)
+      //                    .ToList();
 
-      return userInputs;
-    }
+      //return userInputs;
+      
+    //}
 
     // I didn't show this, but this is common
-    public HttpResponseMessage Get(int id, bool includeItemRatings = false)
-    {
-      IQueryable<UserFeatureSet> results;
+    //public HttpResponseMessage Get(int id, bool includeItemRatings = false)
+    //{
+    //  IQueryable<UserFeatureSet> results;
 
-      if (includeItemRatings == true)
-      {
-        //results = _repo.GetUserFeatureSetsIncludingItemRatings();
-      }
-      else
-      {
-        //results = _repo.GetUserFeatures();
-      }
+    //  if (includeItemRatings == true)
+    //  {
+    //    //results = _repo.GetUserFeatureSetsIncludingItemRatings();
+    //  }
+    //  else
+    //  {
+    //    //results = _repo.GetUserFeatures();
+    //  }
 
-      var topic = results.Where(t => t.Id == id).FirstOrDefault();
+    //  var topic = results.Where(t => t.Id == id).FirstOrDefault();
 
-      if (topic != null) return Request.CreateResponse(HttpStatusCode.OK, topic);
+    //  if (topic != null) return Request.CreateResponse(HttpStatusCode.OK, topic);
 
-      return Request.CreateResponse(HttpStatusCode.NotFound);
-    }
+    //  return Request.CreateResponse(HttpStatusCode.NotFound);
+    //}
 
     //public IEnumerable<ItemFeatureSet> Get
 

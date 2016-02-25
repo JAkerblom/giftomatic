@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:f5bv9w5661.database.windows.net;Database=ffcgamd-db;User ID=ffcgdb_web@f5bv9w5661;Password=OMG!3v1lb4n4as!;Trusted_Connection=False;Encrypt=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JAkerblom\\Documents\\Visual\ Studio\ 2015\\Projects\\Test-giftomatic\\pluralsight\\Giftomatic\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="Giftomatic.Data.MessageBoardContext-Web.config Connection String" description="Giftomatic.Data.MessageBoardContext Connection String used in web.config by the application to access the database." defaultValue="Giftomatic.Data.MessageBoardContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JAkerblom\\Documents\\Visual\ Studio\ 2015\\Projects\\Test-giftomatic\\pluralsight\\Giftomatic\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Giftomatic.Data.MessageBoardContext']/@connectionString" />
+  </parameter>
+  <parameter name="Giftomatic.Data.PredictionDataContext-Web.config Connection String" description="Giftomatic.Data.PredictionDataContext Connection String used in web.config by the application to access the database." defaultValue="Giftomatic.Data.PredictionDataContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JAkerblom\\Documents\\Visual\ Studio\ 2015\\Projects\\Test-giftomatic\\pluralsight\\Giftomatic\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Giftomatic.Data.PredictionDataContext']/@connectionString" />
+  </parameter>
+  <parameter name="Giftomatic.Models.UsersContext-Web.config Connection String" description="Giftomatic.Models.UsersContext Connection String used in web.config by the application to access the database." defaultValue="Giftomatic.Models.UsersContext_ConnectionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\JAkerblom\\Documents\\Visual\ Studio\ 2015\\Projects\\Test-giftomatic\\pluralsight\\Giftomatic\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Giftomatic.Models.UsersContext']/@connectionString" />
+  </parameter>
+</parameters>

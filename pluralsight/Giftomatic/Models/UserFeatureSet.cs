@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace Giftomatic.Models
@@ -34,7 +35,18 @@ namespace Giftomatic.Models
 
         public ICollection<ItemRating> ItemRatings { get; set; }
 
-        //public int ItemId { get; set; }
-        //public int Rating { get; set; }
+    //internal IDictionary<string, object> AsDictionary(this object source, BindingFlags bindingAttr = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance)
+    //{
+    //  return source.GetType().GetProperties(bindingAttr).ToDictionary
+    //  (
+    //    propInfo => propInfo.Name,
+    //    propInfo => 
+    //  );
+      
+    //  //throw new NotImplementedException();
+    //}
+
+    //public int ItemId { get; set; }
+    //public int Rating { get; set; }
   }
 }
